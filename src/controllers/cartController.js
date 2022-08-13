@@ -145,8 +145,6 @@ const getCart = async function (req, res) {
     try {
 
         const userId = req.params.userId;
-
-
         if (!isValidObjectId(userId)) {
             res.status(400).send({ status: false, msg: "userId is not Valid" })
         }
@@ -168,7 +166,6 @@ const getCart = async function (req, res) {
         return res.status(500).send({ status: false, error: err.message })
     }
 }
-
 
 
 const updateCart = async function (req, res) {

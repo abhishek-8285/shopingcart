@@ -41,7 +41,7 @@ const createOrder = async function(req, res){
             return res.status(400).send({ status: false, messsage: "Status should be pending only at the time of create order" })
         }    
 
-      let savedOrder = await orderModel.create(data)
+    let savedOrder = await orderModel.create(data)
       //----------------Removing product from cart------------------//
         await cartModel.findOneAndUpdate({ _id: findCart._id }, { $set: { items: [], totalPrice: 0, totalItems: 0 } }, { new: true })
         return res.status(200).send({ status: true, message: "Order Created Successfully", data: savedOrder })
@@ -58,31 +58,27 @@ const updateOrder = async function(req,res){
         let data =req.body
         let {orderId,status} = data
 
-
-        
         if(!isValidRequest(data)) return res.status(400).send({status:false, message:"Body is empty"})
-        
-
+ 
         if(!isValid(orderId))return res.status(400).send({status:false,message:'order id is emty'})
         if(!isValidObjectId(orderId))return res.status(400).send({status:false,message:'pls enter valid order id'})
-
 
         let findOrder = await orderModel.findOne(({_id: orderId}))
         if(!findOrder) return res.status(404).send({status:false,message:'no order found '})
 
         if(findOrder.userId.valueOf() !== userId){
-           
+        
             return res.status(400).send({status:false,message:'orderid does not belongs to userid '})
         }
 
         if(!status){
-               return res.status(400).send({status:false,message:'status is required for update order '})
+            return res.status(400).send({status:false,message:'status is required for update order '})
         }
 
 
-          if(!isValid(status))return res.status(400).send({status:false,message:'status is empty'})
+        if(!isValid(status))return res.status(400).send({status:false,message:'status is empty'})
 
-          if(!(["pending", "completed", "cancelled"].includes(status)))return res.status(400).send({status:false,message:"order status should be 'pending'/'completed'/'cancelled'"})
+        if(!(["pending", "completed", "cancelled"].includes(status)))return res.status(400).send({status:false,message:"order status should be 'pending'/'completed'/'cancelled'"})
 
         if(findOrder.status=="cancelled"){
 
@@ -98,10 +94,10 @@ const updateOrder = async function(req,res){
           if(findOrder.cancellable==false){
             return res.status(400).send({status:false,message:'the order is not cancellable '})
 
-          }
+        }
 
-          const updateOrder = await orderModel.findOneAndUpdate({_id:orderId},{status:status},{new:true})
-           return res.status(200).send({status:true,message:'order update succesfully'})
+        const updateOrder = await orderModel.findOneAndUpdate({_id:orderId},{$set:{status:status}},{new:true})
+        return res.status(200).send({status:true,message:'order update succesfully', data: updateOrder})
 
     }
 

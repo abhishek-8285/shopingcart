@@ -1,5 +1,5 @@
 {
-  "name": "project5",
+  "name": "productManagement",
   "version": "1.0.0",
   "description": "\"Product management\"",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/techguru142/project-productManagement.git"
+    "url": "git+https://github.com/betechnoid/productManagement.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/techguru142/project-productManagement/issues"
+    "url": "https://github.com/betechnoid/productManagement/issues"
   },
-  "homepage": "https://github.com/techguru142/project-productManagement#readme",
+  "homepage": "hhttps://github.com/betechnoid/productManagement#readme",
   "dependencies": {
     "aws-sdk": "^2.1181.0",
     "bcrypt": "^5.0.1",

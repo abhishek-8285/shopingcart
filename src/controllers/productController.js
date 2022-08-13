@@ -119,7 +119,7 @@ const findProduct = async function (req, res) {
         }
         let sortDocu = {}
         if (priceSort !== undefined) {
-            if(![1,-1,'1','-1'].includes(priceSort)) return res.status(400).send({status:false, message:"You can only sort by 1 or -1"})
+            if(!['1','-1'].includes(priceSort)) return res.status(400).send({status:false, message:"You can only sort by 1 or -1"})
             if (priceSort == 1) {
                 sortDocu.priceSort = priceSort
             }

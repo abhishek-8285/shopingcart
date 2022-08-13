@@ -22,9 +22,6 @@ const authentication = function(req,res, next){
 }
 
 
-
-
-
 const authorization = async (req, res, next) => {
     try {
         let token = req.headers['authorization'];
@@ -47,8 +44,6 @@ const authorization = async (req, res, next) => {
     } catch (error) { 
         return res.status(500).send({ status: false, message: error.message })
     }
-
-
 
 }
 
